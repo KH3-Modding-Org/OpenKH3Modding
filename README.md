@@ -1,5 +1,5 @@
 # OpenKH3Modding
-## KH3Modding Tutorials - Join the Server at https://discord.openkh.dev/
+## KH3Modding Tutorials - Join the OpenKH Server at https://discord.openkh.dev/
 
 
 ### uProject and Engine Installation
