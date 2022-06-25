@@ -40,9 +40,13 @@ To customize the engine source to make additional fields BP accessible, see [her
 ### Animation Editing and Notifies
 
 ## Misc. Resources and Tools
+
 uModel (Model/Texture/Animation Viewer): https://www.gildor.org/en/projects/umodel
+
 FModel (Asset Parser and Model/Texture Viewer): https://fmodel.app/
+
 UAssetGUI (Asset Editor and Parser with advanced asset editing through json serialization): https://github.com/atenfyr/UAssetGUI
+
 AssetEditor (Asset Editor with export/import of asset structs): https://github.com/kaiheilos/Utilities
 
 
