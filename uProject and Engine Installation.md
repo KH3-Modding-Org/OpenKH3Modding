@@ -164,8 +164,11 @@ If the .sln did generate, you're done!  Double click on the TresGame.uproject to
 If your problem is not solved by the below, then navigate to Saved/Logs for both your uProject folder, your engine folder, and the automation tool (see below paths), and request help in the server by sending the relevant logs from each.
 
 {EngineFolderRoot}\Engine\Saved\Logs
+
 {EngineFolderRoot}\Engine\Programs\AutomationTool\Saved\Logs
+
 {EngineFolderRoot}\Engine\Programs\UnrealHeaderTool\Saved\Logs
+
 {ProjectFolderRoot}\Saved\Logs
 
 
