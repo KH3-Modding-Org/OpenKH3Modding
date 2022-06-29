@@ -37,6 +37,11 @@ AssetEditor (Asset Editor with export/import of asset structs): https://github.c
 ### [Simple Weapon Material Guide](https://docs.google.com/document/d/1IToouvZnqmAXFh2QOKWv0yefHRBWWvMKnXKIWR9sZu4) (Google Doc) by Aproydtix
 
 
+## Material Modding
+
+### [Stained Glass Material Editing Guide](/PDF%20Tutorials/Stained_Glass_Tutorial%20by%20dedede123.pdf) by dedede123 from OpenKH Discord
+
+
 # Ignore everything below this as it is not done.
 
 ### uProject and Engine Source Edits
