@@ -27,6 +27,14 @@ UAssetGUI (Asset Editor and Parser with advanced asset editing through json seri
 
 AssetEditor (Asset Editor with export/import of asset structs): https://github.com/kaiheilos/Utilities
 
+
+## Weapon Modding
+
+### [Kingdom Hearts III Modding Tutorial - Custom Weapon Models v3](https://www.youtube.com/watch?v=y0gY-ZY-QU8) (YouTube) by Dallin1016 - https://twitter.com/dallin1016
+
+### [KH3 Modding Tutorial - Custom Skeletons for Custom Weapons](https://www.youtube.com/watch?v=uFgW6MZNTaE) (YouTube) by Dallin1016 - https://twitter.com/dallin1016
+
+
 # Ignore everything below this as it is not done.
 
 ### uProject and Engine Source Edits
