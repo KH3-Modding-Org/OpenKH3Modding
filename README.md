@@ -95,7 +95,7 @@ Aproydtix - Various tutorials
 
 Dedede123 - Stained Glass tutorial
 
-Richy5 - Hair and eye color guide
+Richy5 - [YouTube](https://www.youtube.com/channel/UCfgnQf_HcETmusIo_fx_Npw) - Hair and eye color guide
 
 Narknon - Engine Installation
 
