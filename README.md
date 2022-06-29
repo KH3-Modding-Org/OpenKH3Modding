@@ -45,6 +45,32 @@ AssetEditor (Asset Editor with export/import of asset structs): https://github.c
 ### [Change Hair and Eye Colours Guide](/PDF%20Tutorials/Change_Hair_and_Eyes_Colours_Guide%20by%20Richy5.pdf)) by Richy5 from OpenKH Discord
 
 
+
+# Contributors
+
+
+
+### Tutorials
+
+Dallin1016 - [YouTube](https://www.youtube.com/user/Minecrafter1016) / [Twitter](https://twitter.com/dallin1016) - Custom Weapons
+
+Aproydtix - Various tutorials
+
+Dedede123 - Stained Glass tutorial
+
+Richy5 - [YouTube](https://www.youtube.com/channel/UCfgnQf_HcETmusIo_fx_Npw) - Hair and eye color guide
+
+Narknon - Engine Installation
+
+### Custom Engine and uProject Work
+Joseph
+
+Narknon
+
+
+
+
+
 # Ignore everything below this as it is not done.
 
 ### uProject and Engine Source Edits
@@ -82,27 +108,6 @@ To customize the engine source to make additional fields BP accessible, see [her
 
 
 
-
-# Contributors
-
-
-
-### Tutorials
-
-Dallin1016 - [YouTube](https://www.youtube.com/user/Minecrafter1016) / [Twitter](https://twitter.com/dallin1016) - Custom Weapons
-
-Aproydtix - Various tutorials
-
-Dedede123 - Stained Glass tutorial
-
-Richy5 - [YouTube](https://www.youtube.com/channel/UCfgnQf_HcETmusIo_fx_Npw) - Hair and eye color guide
-
-Narknon - Engine Installation
-
-### Custom Engine and uProject Work
-Joseph
-
-Narknon
 
 
 
