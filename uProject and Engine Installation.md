@@ -90,4 +90,23 @@ If the .sln did generate, you're done!  Double click on the TresGame.uproject to
 
 
 
+
+
+
 # 3. Troubleshooting
+
+If your problem is not solved by the below, then navigate to Saved/Logs for both your uProject folder, your engine folder, and the automation tool (see below paths), and request help in the server by sending the relevant logs from each.
+
+{EngineFolderRoot}\Engine\Saved\Logs
+{EngineFolderRoot}\Engine\Programs\AutomationTool\Saved\Logs
+{EngineFolderRoot}\Engine\Programs\UnrealHeaderTool\Saved\Logs
+{ProjectFolderRoot}\Saved\Logs
+
+
+### Installation was succesful and .sln generates, but project won't launch.
+
+The most common reason for this issue is that Unreal Engine has a bugged interaction with ssl services and may not be properly find the path to the prerequisites for http.  To fix this, we will add the path as an environment variable manually.  If you do not know how to add an environment variable to your OS, see [here](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html).
+
+Create an environment variable with the name “OPENSSL_ia32cap” and the value “:~0x20000000d” (both without quotes).  Try launching again.
+
+
