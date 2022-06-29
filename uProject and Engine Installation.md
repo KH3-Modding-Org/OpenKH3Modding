@@ -8,7 +8,9 @@
 If you have not done so already, follow the instructions here to create and link a Github account to an Epic Games account: https://www.unrealengine.com/en-US/ue-on-github
 
 
-Download and install Visual Studio 2017.  If you are installing for the first time, be sure to include the below options.
+Download and install Visual Studio 2017.  It can be found here (https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads), and you should download the "Community" version.  You may need to log in to a Microsoft account to access this link.
+
+If you are installing for the first time, be sure to include the below options.
 
 ### C++ Tools
 To add C++ tools to your VS installation, make sure you select Game development with C++ under Workloads, as well as these additional options.
