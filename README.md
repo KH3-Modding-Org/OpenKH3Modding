@@ -14,7 +14,7 @@ For install along with Github desktop to allow for easy updates see [option 2](h
 
 For troubleshooting see [section 3](https://github.com/narknon/OpenKH3Modding/edit/main/uProject%20and%20Engine%20Installation.md#3-troubleshooting).
 
-I highly recommend following option 2, as you can update with the click of a button and updates will only download changed files.  Further, you can even backup your project to a private branch of the uproject.  Only you and those you add as collaborators can access a private branch, and if your harddrive is ever lost, or you lose/break a file, you can always revert to an old commit and restore it!
+I highly recommend following option 2, as you can update with the click of a button and updates will only download changed files, rather than needing to download the entire repositories again.  Further, you can even backup your project to a private branch of the uproject.  Only you and those you add as collaborators can access a private branch, and if your harddrive is ever lost, or you lose/break a file, you can always revert to an old commit and restore it!
 
 
 ## Misc. Resources and Tools
