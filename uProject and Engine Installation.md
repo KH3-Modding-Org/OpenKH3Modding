@@ -30,7 +30,8 @@ To include the UE installer when installing VS, locate the Summary sidebar on th
 ![image](https://user-images.githubusercontent.com/73571427/176460487-8654e419-2dc4-4cb3-8e67-314c558492b5.png)
 
 
-## 1. Standard Install - No easy updating
+
+# 1. Standard Install - No easy updating
 
 
 Proceed to the links https://github.com/narknon/TresGame/tree/TresGame-Built and https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt.  The branch selection should say the following for each: ![image](https://user-images.githubusercontent.com/73571427/176455859-17346cd2-4cfb-4c6d-8c7d-dfbb8bec563e.png)
@@ -73,4 +74,9 @@ Following this, the uproject should generate a .sln file.  If this file does not
 
 
 If the .sln did generate, you're done!  Double click on the TresGame.uproject to launch the project!
+
+### Done!
+
+
+
 
