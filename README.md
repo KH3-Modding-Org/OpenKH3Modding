@@ -42,6 +42,9 @@ AssetEditor (Asset Editor with export/import of asset structs): https://github.c
 ### [Stained Glass Editing Tutorial](/PDF%20Tutorials/Stained_Glass_Tutorial%20by%20dedede123.pdf) by dedede123 from OpenKH Discord
 
 
+### [Change Hair and Eye Colours Guide](/PDF%20Tutorials/Change_Hair_and_Eyes_Colours_Guide%20by%20Richy5.pdf)) by Richy5 from OpenKH Discord
+
+
 # Ignore everything below this as it is not done.
 
 ### uProject and Engine Source Edits
@@ -91,6 +94,8 @@ Dallin1016 - [YouTube](https://www.youtube.com/user/Minecrafter1016) / [Twitter]
 Aproydtix - Various tutorials
 
 Dedede123 - Stained Glass tutorial
+
+Richy5 - Hair and eye color guide
 
 Narknon - Engine Installation
 
