@@ -25,6 +25,9 @@ To add C++ tools to your VS installation, make sure you select Game development 
 ### Include the UE Installer
 To include the UE installer when installing VS, locate the Summary sidebar on the right, expand Game Development with C++, and under Optional, make sure the checkbox for Unreal Engine installer is checked to enable it. 
 
+![image](https://user-images.githubusercontent.com/73571427/176460487-8654e419-2dc4-4cb3-8e67-314c558492b5.png)
+
+
 ## 1. Standard Install - No easy updating
 
 
