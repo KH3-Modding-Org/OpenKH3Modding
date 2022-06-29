@@ -18,7 +18,8 @@ Download and install Visual Studio 2017.  It can be found here (https://my.visua
 
 If you are installing for the first time, be sure to include the below options.
 
-### C++ Tools
+### VS - C++ Tools
+
 To add C++ tools to your VS installation, make sure you select Game development with C++ under Workloads, as well as these additional options.
 
 
@@ -30,7 +31,7 @@ To add C++ tools to your VS installation, make sure you select Game development 
 
     Windows 10 SDK (10.0.18362 or Newer) 
 
-### Include the UE Installer
+### VS - Include the UE Installer
 To include the UE installer when installing VS, locate the Summary sidebar on the right, expand Game Development with C++, and under Optional, make sure the checkbox for Unreal Engine installer is checked to enable it. 
 
 ![image](https://user-images.githubusercontent.com/73571427/176460487-8654e419-2dc4-4cb3-8e67-314c558492b5.png)
