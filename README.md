@@ -33,7 +33,7 @@ AssetEditor (Asset Editor with export/import of asset structs): https://github.c
 
 To customize the engine source to make additional fields BP accessible, see [here](https://github.com/narknon/OpenKH3Modding/blob/main/).
 
-### Installing Custom Uncooked Content
+### [Installing Custom Uncooked Content](/Installing%20Custom%20Uncooked%20Content#L1)
 
 
 
