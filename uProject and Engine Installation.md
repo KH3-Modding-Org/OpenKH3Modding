@@ -33,6 +33,7 @@ and ![image](https://user-images.githubusercontent.com/73571427/176455900-35dcc8
 
 
 Click on the green arrow to the right, and select download zip.
+
 ![image](https://user-images.githubusercontent.com/73571427/176456031-7dd76359-dce9-4ac4-9a10-616bae4552e4.png)
 
 
@@ -49,6 +50,7 @@ Inside the engine folder, double click the file named Setup.bat.  Wait for this 
 Following that, run GenerateProjectFiles.bat.  This should finish much quicker, and exit without prompting once it is complete.
 
 Finally, navigate to find the UnrealVersionSelector-Win64-Shipping.exe at the following path: \Engine\Binaries\Win64\UnrealVersionSelector-Win64-Shipping.exe.  Double click this file. It will then ask if you wish to register the directory as an Unreal installation.  Select yes.  It should then say registration succesful.
+
 ![image](https://user-images.githubusercontent.com/73571427/176457712-115965b1-d260-4845-83c9-d77dcf127e10.png)
 
 
