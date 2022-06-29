@@ -131,6 +131,10 @@ Once completed, rename the engine folder (KHEngineBuilt) to whatever you would l
 
 Inside the engine root folder (not the /Engine/ folder within the downloaded folders), double click the file named Setup.bat.  Wait for this to complete.  At the very end of its process, it will pop-up a Windows Elevated rights request in the background, so be sure to check your taskbar and select and allow the elevation.
 
+![image](https://user-images.githubusercontent.com/73571427/176477471-ef0b54df-e784-4c1c-9565-d4a1ffcf881f.png)
+
+![image](https://user-images.githubusercontent.com/73571427/176477497-4d25c243-ff9b-4bfb-97bb-b3871875a0f9.png)
+
 
 Following that, run GenerateProjectFiles.bat.  This should finish much quicker, and exit without prompting once it is complete.
 
