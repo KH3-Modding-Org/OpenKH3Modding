@@ -86,7 +86,7 @@ To customize the engine source to make additional fields BP accessible, see [her
 
 ### Tutorials
 
-Dallin1016 - https://twitter.com/dallin1016 - Custom Weapons
+Dallin1016 - [YouTube](https://www.youtube.com/user/Minecrafter1016) / [Twitter](https://twitter.com/dallin1016) - Custom Weapons
 
 Aproydtix - Various tutorials
 
