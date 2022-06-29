@@ -71,10 +71,11 @@ Finally, navigate to find the UnrealVersionSelector-Win64-Shipping.exe at the fo
 
 Inside the folder to which you extracted the project, find the TresGame.uproject file.  Right click on this file, and select "Switch Unreal Engine Version".  If you correctly registered the engine directory as an Unreal directory, it should simply appear in the dropdown.  If it does not appear automatically, click the three dots to the right of the path. Navigate to the folder to which you extracted the engine, and select the root folder (i.e., the folder that contains the setup.bat file).
 
+![image](https://user-images.githubusercontent.com/73571427/176458008-307cc67f-0122-4a1b-9025-964c3592c8c1.png)
+
+
 ![image](https://user-images.githubusercontent.com/73571427/176459346-7e40b7bd-ab8d-4e81-8866-e6acc9394b79.png)
 
-
-![image](https://user-images.githubusercontent.com/73571427/176458008-307cc67f-0122-4a1b-9025-964c3592c8c1.png)
 
 
 Following this, the uproject should generate a .sln file.  If this file does not generate, something went wrong.  Try right clicking on the TresGame.uproject again, and this time select "Generate Project Files."  If the .sln still does not generate, something else is happening.  Navigate to your Saved/Logs folder to find a file titled unrealversionselector-2022.06.29-09.16.08.log (the date will be the current date/time), and check to see what the error was, or post the file in the #kh3-modding channel on the discord for help. 
@@ -143,10 +144,11 @@ Wait for the download to complete based on the output in the console window.  Th
 
 Once complete, find the TresGame.uproject file in this folder.  Right click on this file, and select "Switch Unreal Engine Version".  If you correctly registered the engine directory as an Unreal directory, it should simply appear in the dropdown.  If it does not appear automatically, click the three dots to the right of the path. Navigate to the folder to which you extracted the engine, and select the root folder (i.e., the folder that contains the setup.bat file).
 
-![image](https://user-images.githubusercontent.com/73571427/176459346-7e40b7bd-ab8d-4e81-8866-e6acc9394b79.png)
-
 
 ![image](https://user-images.githubusercontent.com/73571427/176458008-307cc67f-0122-4a1b-9025-964c3592c8c1.png)
+
+
+![image](https://user-images.githubusercontent.com/73571427/176459346-7e40b7bd-ab8d-4e81-8866-e6acc9394b79.png)
 
 
 Following this, the uproject should generate a .sln file.  If this file does not generate, something went wrong.  Try right clicking on the TresGame.uproject again, and this time select "Generate Project Files."  If the .sln still does not generate, something else is happening.  Navigate to your Saved/Logs folder to find a file titled unrealversionselector-2022.06.29-09.16.08.log (the date will be the current date/time), and check to see what the error was, or post the file in the #kh3-modding channel on the discord for help. 
