@@ -97,6 +97,7 @@ If the .sln did generate, you're done!  Double click on the TresGame.uproject to
 ### Additional Prerequisites
 
 Github Desktop: https://desktop.github.com/ (install with defaults, being sure to include any options relating to adding GIT as an environmental variable/path.)
+
 Git CLI: https://git-scm.com/downloads (install with defaults, being sure to include any options relating to adding GIT as an environmental variable/path.)
 
 
