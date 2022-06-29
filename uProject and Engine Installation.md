@@ -1,6 +1,9 @@
 # uProject and Engine Installation Instructions
 
-### See 1 for standard install, 2 for install along with Github desktop to allow for easy updates.  See 3 for troubleshooting.
+### See option 1 for standard install, option 2 for install along with Github desktop to allow for easy updates.  Be sure to follow the prerequisites.  See 3 for troubleshooting.
+
+I highly recommend following option 2, as you can update with the click of a button and updates will only download changed files.  Further, you can even backup your project to a private branch of the uproject.  Only you and those you add as collaborators can access a private branch, and if your harddrive is ever lost, or you lose/break a file, you can always revert to an old commit and restore it!
+
 
 ## Prerequisites
 
@@ -80,3 +83,7 @@ If the .sln did generate, you're done!  Double click on the TresGame.uproject to
 
 
 
+# 2. Github Clone Install - Update with the click of a button
+
+
+### Additional Prerequisites
