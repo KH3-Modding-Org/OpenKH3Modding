@@ -34,6 +34,8 @@ AssetEditor (Asset Editor with export/import of asset structs): https://github.c
 
 ### [KH3 Modding Tutorial - Custom Skeletons for Custom Weapons](https://www.youtube.com/watch?v=uFgW6MZNTaE) (YouTube) by Dallin1016 - https://twitter.com/dallin1016
 
+### [Simple Weapon Material Guide](https://docs.google.com/document/d/1IToouvZnqmAXFh2QOKWv0yefHRBWWvMKnXKIWR9sZu4) (Google Doc) by Aproydtix
+
 
 # Ignore everything below this as it is not done.
 
