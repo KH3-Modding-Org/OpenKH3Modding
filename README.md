@@ -39,7 +39,7 @@ AssetEditor (Asset Editor with export/import of asset structs): https://github.c
 
 ## Material Modding
 
-### [Stained Glass Material Editing Guide](/PDF%20Tutorials/Stained_Glass_Tutorial%20by%20dedede123.pdf) by dedede123 from OpenKH Discord
+### [Stained Glass Editing Tutorial](/PDF%20Tutorials/Stained_Glass_Tutorial%20by%20dedede123.pdf) by dedede123 from OpenKH Discord
 
 
 # Ignore everything below this as it is not done.
