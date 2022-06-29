@@ -1,6 +1,6 @@
 # uProject and Engine Installation Instructions
 
-### See [option 1](/uProject%20and%20Engine%20Installation.md#1-standard-install---no-easy-updating) for standard install, [option 2](/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button) for install along with Github desktop to allow for easy updates.  Be sure to follow the [prerequisites](/uProject%20and%20Engine%20Installation.md#prerequisites).  See [section 3](/uProject%20and%20Engine%20Installation.md#3-troubleshooting) for troubleshooting.
+### See [option 1](/uProject%20and%20Engine%20Installation.md#1-standard-install---no-easy-updating) for standard install, [option 2](/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button) for install along with Github desktop to allow for easy updates.  Be sure to install any missing [prerequisites](/uProject%20and%20Engine%20Installation.md#prerequisites) first.  See [section 3](/uProject%20and%20Engine%20Installation.md#3-troubleshooting) for troubleshooting.
 
 I highly recommend following option 2, as you can update with the click of a button and updates will only download changed files.  Further, you can even backup your project to a private branch of the uproject.  Only you and those you add as collaborators can access a private branch, and if your harddrive is ever lost, or you lose/break a file, you can always revert to an old commit and restore it!
 
