@@ -37,7 +37,7 @@ AssetEditor (Asset Editor with export/import of asset structs): https://github.c
 ### [Simple Weapon Material Guide](https://docs.google.com/document/d/1IToouvZnqmAXFh2QOKWv0yefHRBWWvMKnXKIWR9sZu4) (Google Doc) by Aproydtix
 
 
-## Material Modding
+## Texture/Material Modding
 
 ### [Stained Glass Editing Tutorial](/PDF%20Tutorials/Stained_Glass_Tutorial%20by%20dedede123.pdf) by dedede123 from OpenKH Discord
 
@@ -82,13 +82,15 @@ To customize the engine source to make additional fields BP accessible, see [her
 
 # Contributors
 
-### OpenKHFuncLib
-Chirijiraden
 
-### Notify Lib
-Chirijiraden
 
 ### Tutorials
+
+Dallin1016 - https://twitter.com/dallin1016 - Custom Weapons
+
+Aproydtix - Various tutorials
+
+Dedede123 - Stained Glass tutorial
 
 Narknon - Engine Installation
 
