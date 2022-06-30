@@ -188,7 +188,7 @@ The repository should now be added as the current repository.
 ![image](https://user-images.githubusercontent.com/73571427/176688075-eef2ed9d-3151-4320-b000-f75a67eea494.png)
 
 
-Do the same for the engine.  Now you should be able to swap between both by clicking the "Current Repository" button.
+Do the same for the engine.  Now you should be able to swap between both by clicking the "Current Repository" button.  You can also switch between branches easily if you'd like to try out one of the experimental branches.
 
 
 ### Done!
