@@ -2,7 +2,7 @@
 
 ### See [option 1](/uProject%20and%20Engine%20Installation.md#1-standard-install---no-easy-updating) for standard install, or [option 2](/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button) for install along with Github desktop to allow for easy updates.  Be sure to install any missing [prerequisites](/uProject%20and%20Engine%20Installation.md#prerequisites) first.  See [section 3](/uProject%20and%20Engine%20Installation.md#3-troubleshooting) for troubleshooting.
 
-I highly recommend following option 2, as you can update with the click of a button and updates will only download changed files.  Further, you can even backup your project to a private branch of the uproject.  Only you and those you add as collaborators can access a private branch, and if your harddrive is ever lost, or you lose/break a file, you can always revert to an old commit and restore it!
+I highly recommend following option 2, as you can update with the click of a button and updates will only download changed files.
 
 
 ## Prerequisites
@@ -163,10 +163,33 @@ Once complete, find the TresGame.uproject file in this folder.  Right click on t
 ![image](https://user-images.githubusercontent.com/73571427/176459346-7e40b7bd-ab8d-4e81-8866-e6acc9394b79.png)
 
 
-Following this, the uproject should generate a .sln file.  If this file does not generate, something went wrong.  Try right clicking on the TresGame.uproject again, and this time select "Generate Project Files."  If the .sln still does not generate, something else is happening.  Navigate to your Saved/Logs folder to find a file titled unrealversionselector-2022.06.29-09.16.08.log (the date will be the current date/time), and check to see what the error was, or post the file in the #kh3-modding channel on the discord for help. 
+Following this, the uproject should generate a .sln file.  If this file does not generate, something went wrong.  Try right clicking on the TresGame.uproject again, and this time select "Generate Project Files."  If the .sln still does not generate, something else is happening.  Navigate to your Saved/Logs folder to find a file titled unrealversionselector-2022.06.29-09.16.08.log (the date will be the current date/time, not the one listed here), and check to see what the error was, or post the file in the #kh3-modding channel on the discord for help. 
 
 
-If the .sln did generate, you're done!  Double click on the TresGame.uproject to launch the project!
+If the .sln did generate, you should now be able to launch the project by double clicking on the TresGame.uproject.  Proceed to the Github Desktop steps below to allow one-button updates.
+
+### Github Desktop
+
+Open Github Desktop and navigate to File->Add Local Repository; or press CTRL+O.  
+
+![image](https://user-images.githubusercontent.com/73571427/176687516-0dfd3263-16f4-4b3d-aa0c-113b6dfb798d.png)
+
+
+In the new dialog, press "Choose" and navigate to the folder to which you cloned the uproject (this will be the folder that contains the hidden .git folder, not the folder that is a directory up from that).
+
+![image](https://user-images.githubusercontent.com/73571427/176687457-13a4c1b3-aaeb-48b9-97a4-b9485ed0d3bd.png)
+
+Once inside this folder, press select folder.
+
+![image](https://user-images.githubusercontent.com/73571427/176687920-28b70244-6639-41f5-8900-c125e032a354.png)
+
+The repository should now be added as the current repository.
+
+![image](https://user-images.githubusercontent.com/73571427/176688075-eef2ed9d-3151-4320-b000-f75a67eea494.png)
+
+
+Do the same for the engine.  Now you should be able to swap between both by clicking the "Current Repository" button.
+
 
 ### Done!
 
