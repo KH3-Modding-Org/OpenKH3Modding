@@ -149,7 +149,7 @@ Create a new folder that is not within the engine folder to which you would like
 
 Open a new powershell window from within this new folder.  Paste the below command into the powershell window
 
-    git clone --branch TresGame-Built --single-branch https://github.com/narknon/TresGame.git\
+    git clone --branch TresGame-Built --single-branch https://github.com/narknon/TresGame.git
     
     
 Wait for the download to complete based on the output in the console window.  This should be much quicker than the engine download.
