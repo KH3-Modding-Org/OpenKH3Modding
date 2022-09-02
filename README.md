@@ -4,15 +4,15 @@
 
 ### uProject and Engine Installation
 
-For instructions on installing the uProject and custom engine, go [here](https://github.com/narknon/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md).
+For instructions on installing the uProject and custom engine, go [here](uProject%20and%20Engine%20Installation.md).
 
-Make sure you install all [prerequisites](https://github.com/narknon/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md#prerequisites).
+Make sure you install all [prerequisites](uProject%20and%20Engine%20Installation.md#prerequisites).
 
-For standard install, see [option 1](https://github.com/narknon/OpenKH3Modding/edit/main/uProject%20and%20Engine%20Installation.md#1-standard-install---no-easy-updating).
+For standard install, see [option 1](uProject%20and%20Engine%20Installation.md#1-standard-install---no-easy-updating).
 
-For install along with Github desktop to allow for easy updates see [option 2](https://github.com/narknon/OpenKH3Modding/edit/main/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button).  
+For install along with Github desktop to allow for easy updates see [option 2](uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button).  
 
-For troubleshooting see [section 3](https://github.com/narknon/OpenKH3Modding/edit/main/uProject%20and%20Engine%20Installation.md#3-troubleshooting).
+For troubleshooting see [section 3](uProject%20and%20Engine%20Installation.md#3-troubleshooting).
 
 I highly recommend following option 2, as you can update with the click of a button and updates will only download changed files, rather than needing to download the entire repositories again.  Further, you can even backup your project to a private branch of the uproject.  Only you and those you add as collaborators can access a private branch, and if your harddrive is ever lost, or you lose/break a file, you can always revert to an old commit and restore it!
 
