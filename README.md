@@ -4,6 +4,9 @@
 
 ### uProject and Engine Installation
 
+### Thanks to Dedede123 from the server, we now have a script that majorly automates this for you: [NarkEngine_Install.zip](https://github.com/KH3-Modding-Org/OpenKH3Modding/files/9947697/NarkEngine_Install.zip)
+
+
 For instructions on installing the uProject and custom engine, go [here](uProject%20and%20Engine%20Installation.md).
 
 Make sure you install all [prerequisites](uProject%20and%20Engine%20Installation.md#prerequisites).
