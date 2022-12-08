@@ -21,15 +21,20 @@ The script tries to automate process and tries to avoid common pitfalls. Steps (
 - Plenty of disk space (~20GB)
 
 ## How to run?
-1) Download ZIP and extract to disk
-2) As it is a download from the Internet, you might need to unblock it via right-click -> Properties before you can run it.
-3) Then run NarkEngine_Install.ps1 by right-click > "Run with PowerShell".
+1) Download latest version from the releases page
+2) Extract archive to disk
+3) Run start.bat
 4) Follow the on-screen prompts closely and it should guide you through.
 
+Please note: You will be asked to provide elevated permissions during runtime so the components can be installed on your computer. 
+
 ## Known Issues
-- UnrealBuildTool will fail if VS2017 does not have all necessary modules installed.
+- UnrealBuildTool will fail if VS2017 does not have all necessary modules installed. This should be covered already by previous checks though.
 
 ## To do:
 - [ ] Add verification step for UnrealBuildTool
 
-As it's an "alpha" at this point, I'd be happy to get some feedback. If you run into errors, just send me the console output.
+## Disclaimer
+As it's an "alpha" at this point, I'd be happy to get some feedback. The script generates a log file. If you run into errors, send the file via OpenKH Discord or raise an issue in GitHub.
+
+While the script doesn't do anything else than described above, as always: Use at your own risk.
