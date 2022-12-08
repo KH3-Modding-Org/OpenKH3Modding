@@ -1,0 +1,5 @@
+# Ignore temp file from NarkEngine Install script
+**/temp.vsconfig
+**/vs_community_2017.exe
+**/vswhere.exe
+**/NarkEngine_Install/*.log
