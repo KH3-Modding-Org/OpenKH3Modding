@@ -21,7 +21,7 @@ The script tries to automate process and tries to avoid common pitfalls. Steps (
 - Plenty of disk space (~20GB)
 
 ## How to run?
-1) Download the [latest release](/Minty123/OpenKH3Modding/releases/latest/download/NarkEngine_Install.zip)
+1) Download the [latest release](/Minty123/OpenKH3Modding/releases/latest/download/EngineInstaller/NarkEngine_Install.zip)
 2) Extract archive to disk
 3) Run start.bat
 4) Follow the on-screen prompts closely and it should guide you through.
