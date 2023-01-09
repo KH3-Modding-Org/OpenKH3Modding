@@ -93,35 +93,45 @@ function Start-Setup {
 
         [CmdletBinding()]
         param (
-            [parameter(Mandatory=$true, ValueFromPipeline=$true)]
+            [parameter(Mandatory = $true, ValueFromPipeline = $true)]
             [String]
             $Message,
 
             [parameter()]
-            [ValidateSet("Standard","Warning","Info","Error", "OK", "Highlighted")]
+            [ValidateSet("Standard", "Warning", "Info", "Error", "OK", "Highlighted")]
             $Type = "Standard"
         )
 
         $TypeTags = @{
-            "Standard" = "";
+            "Standard"    = "";
             "Highlighted" = "";
-            "OK" = "[OK] ";
-            "Info" = "[INFO] ";
-            "Warning" = "[WARNING] ";
-            "Error" = "[ERROR] ";
+            "OK"          = "[OK] ";
+            "Info"        = "[INFO] ";
+            "Warning"     = "[WARNING] ";
+            "Error"       = "[ERROR] ";
 
         }
 
         $TypeColor = @{
-            "Standard" = [System.Console]::ForegroundColor;
+            "Standard"    = [System.Console]::ForegroundColor;
             "Highlighted" = "Cyan"
-            "OK" = "Green";
-            "Info" = "Yellow";
-            "Warning" = "Magenta";
-            "Error" = "Red";
+            "OK"          = "Green";
+            "Info"        = "Yellow";
+            "Warning"     = "Magenta";
+            "Error"       = "Red";
         }
 
         Write-Host ("[{0:yyyy-MM-dd} {0:HH:mm:ss}] {1}{2}" -f (Get-Date), $TypeTags[$Type], $Message) -ForegroundColor $TypeColor[$Type]
+    }
+
+    function Get-IntelCoreGeneration {
+        $Name = (Get-WmiObject Win32_processor).Name
+        if ($Name -match "(?<BrandModifier>i\d)-(?<GenDigits>\d+)") {
+            return [Math]::Floor($Matches.GenDigits / 1000)
+        }
+        else {
+            throw "No Intel® Core™ Processor found"
+        }
     }
 
     Function Get-Folder($initialDirectory = "", $Title = "Select a folder") {
@@ -184,7 +194,7 @@ function Start-Setup {
     Write-Host "    - Use at your own risk. Source code is open to read for anyone though."
     Write-Host ""
 
-    if (-not (Test-WritePermissions -Path $PSScriptRoot)){
+    if (-not (Test-WritePermissions -Path $PSScriptRoot)) {
         Write-LogMessage "User is missing write access on script location. Move the script to a different location and try again. Exiting..." -Type Error
         return
     }
@@ -277,7 +287,7 @@ function Start-Setup {
         $VSCONFIG_FILE_PATH = "$DATA_FOLDER_PATH\temp.vsconfig"
         Remove-Item $VSCONFIG_FILE_PATH -Force -ErrorAction SilentlyContinue | Out-Null
         $VSWhereRun = Start-Process $VS2017_INSTALLER_PATH -ArgumentList "export --config $VSCONFIG_FILE_PATH --quiet" -Wait -PassThru
-        if ($VSWhereRun.ExitCode -ne 0){
+        if ($VSWhereRun.ExitCode -ne 0) {
             Write-LogMessage "Failed to check components. Did you deny the User Account Control? Exiting..." -Type Error
             return
         }
@@ -537,6 +547,33 @@ Exiting...
     }
     else {
         Write-LogMessage "Couldn't find UnrealVersionSelector. Right-click in $ProjectPath\$KHPROJECT_REPO_NAME\$KHPROJECT_REPO_NAME.uproject in Explorer and select ""Switch Unreal Engine Version..."". Select your KHEngine there." -Type Warning
+    }
+    Write-Host ""
+    
+    # ##################################### #
+    # Check Processor for Incompatibilities #
+    # ##################################### #
+    
+    # For details see https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md#installation-was-succesful-and-sln-generates-but-project-wont-launch
+    # According to OpenKH discord, Intel Core Gen 10 and higher is affected
+    
+    Write-LogMessage "Checking processor version..."
+
+    try {
+        $ProcGen = Get-IntelCoreGeneration -ge 10
+
+        if ($ProcGen -ge 10) {
+            Write-LogMessage "Processor is an Intel® Core™ Processor Gen 10 or higher." -Type Warning
+            Write-LogMessage "UE Launcher is known to have issues with those. Adjusting OpenSSL settings via environment variable is strongly recommended." -Type Warning
+            $Answer = Read-Host -Prompt "Add environment variable OPENSSL_ia32cap now? You'll be asked for elevated permissions. (Y/N)"
+            if ($Answer.ToLower() -eq "y") {
+                Start-Process powershell -ArgumentList "-Command ""[System.Environment]::SetEnvironmentVariable('OPENSSL_ia32cap',':~0x20000000d',[System.EnvironmentVariableTarget]::Machine)""" -Verb runAs             
+            } else {
+                Write-LogMessage "If launching UE fails, set the system variable manually. Name: ""OPENSSL_ia32cap"". Value: "":~0x20000000d"" (both without quotes)"
+            }
+        }
+    } catch {
+        # No Intel Core. No problem.
     }
 
     # ########## #
