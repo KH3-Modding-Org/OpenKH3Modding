@@ -1,21 +1,21 @@
 # OpenKH3Modding
-## KH3Modding Tutorials - Join the OpenKH Server at https://discord.openkh.dev/
+KH3Modding Tutorials - Join the OpenKH Server at:
+https://discord.openkh.dev
 
+## uProject and Engine Installation
 
-### uProject and Engine Installation
+### Automated Install
+Thanks to Dedede123 from the server, we now have a script that majorly automates this for you: [KHEngineInstall](/KHEngineInstall)
 
-### Thanks to Dedede123 from the server, we now have a script that majorly automates this for you: [NarkEngine_Install.zip](/NarkEngine_Install)
+### Manual Install
 
+For instructions on installing the uProject and custom engine, go [here](uProject%20and%20Engine%20Installation.md). Make sure you install all [prerequisites](uProject%20and%20Engine%20Installation.md#prerequisites).
 
-For instructions on installing the uProject and custom engine, go [here](uProject%20and%20Engine%20Installation.md).
+1) For standard install, see [option 1](uProject%20and%20Engine%20Installation.md#1-standard-install---no-easy-updating).
 
-Make sure you install all [prerequisites](uProject%20and%20Engine%20Installation.md#prerequisites).
+2) For install along with Github desktop to allow for easy updates see [option 2](uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button).  
 
-For standard install, see [option 1](uProject%20and%20Engine%20Installation.md#1-standard-install---no-easy-updating).
-
-For install along with Github desktop to allow for easy updates see [option 2](uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button).  
-
-For troubleshooting see [section 3](uProject%20and%20Engine%20Installation.md#3-troubleshooting).
+3) For troubleshooting see [section 3](uProject%20and%20Engine%20Installation.md#3-troubleshooting).
 
 I highly recommend following option 2, as you can update with the click of a button and updates will only download changed files, rather than needing to download the entire repositories again.  Further, you can even backup your project to a private branch of the uproject.  Only you and those you add as collaborators can access a private branch, and if your harddrive is ever lost, or you lose/break a file, you can always revert to an old commit and restore it!
 

@@ -20,7 +20,7 @@
 .NOTES
     The code of this script is free for anyone to use and modify. It is provided AS IS and without warranty of any kind. 
 
-    File Name       : KHEngine_Install.ps1  
+    File Name       : KHEngineInstall.ps1  
     Author (Script) : Minty123 on GitHub / dedede123 on Discord
 
     Requires        : Linked Epic and Github Accounts
@@ -694,7 +694,8 @@ Exiting...
 # ######### #
 # Execution #
 # ######### #
-$LogFilePath = "$PSScriptRoot\NarkEngine_Install-$(Get-Date -Format "yyyyMMddHHmm").log"
+Remove-Item $PSScriptRoot\tmp.log -ErrorAction SilentlyContinue | Out-Null
+$LogFilePath = "$PSScriptRoot\KHEngineInstall-$(Get-Date -Format "yyyyMMddHHmm").log"
 Start-Transcript "$PSScriptRoot\tmp.log" | Out-Null
 Start-Setup
 Stop-Transcript | Out-Null
@@ -703,4 +704,5 @@ Write-Host ""
 # Workaround to remove personal data from log file
 Get-Content "$PSScriptRoot\tmp.log" | Select-Object -Skip 18 | Set-Content $LogFilePath
 Write-Host "Log file created at $LogFilePath"
+Remove-Item $PSScriptRoot\tmp.log -ErrorAction SilentlyContinue | Out-Null
 Write-Host "Done. You may close this window."
