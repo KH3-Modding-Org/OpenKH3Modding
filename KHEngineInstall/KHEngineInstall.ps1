@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Helper script to install the Custom Unreal Engine (aka NarkEngine) and Unreal Project (aka TresGame) for Kingdom Hearts 3 Modding
 
@@ -20,14 +20,18 @@
 .NOTES
     The code of this script is free for anyone to use and modify. It is provided AS IS and without warranty of any kind. 
 
-    File Name       : NarkEngine_Install.ps1  
+    File Name       : KHEngineInstall.ps1  
     Author (Script) : Minty123 on GitHub / dedede123 on Discord
 
     Requires        : Linked Epic and Github Accounts
                       git.exe in path
                       Plenty of disk space (~20GB)
 
-    Changes:        : 2022-12-08
+    Changes:        : 2024-05-02
+                      - Added selection for multiple KHEngines.
+                      - Renamed to KHEngine Install.
+
+                       2022-12-08
                       - Added transcript logging, more checks, refactored code. Harmonized output using Write-LogMessage
                       - Downloads vswhere to avoid redistributing the file directly
                       - Added start.bat for simpler start + dealing with execution policy
@@ -38,18 +42,18 @@
                       2022-11-05
                       - Alpha Release
     
-    Known Issues    : - VS 2017 detection logic may fail when theres multiple VS 2017 installs   
+    Known Issues    : - VS 2017 detection logic may fail when theres multiple VS 2017 installs
+
+    TODOs           : - Add more prerequisite checks?
+                      - Make cloning a function to avoid code repition.
+                      - Add async git clone via Start-Process. Issue: Output of git.exe not available via Start-Process. Unclear how to do error handling yet.
 
 .LINK 
     For a manual guide of the custom engine and project setup see:
         https://github.com/KH3-Modding-Org/OpenKH3Modding
+
 #>
 
-<# TODOs: 
-    - Add more prerequisite checks?
-    - Make cloning a function to avoid code repition.
-    - Add async git clone via Start-Process. Issue: Output of git.exe not available via Start-Process. Unclear how to do error handling yet.
-#>
 
 function Start-Setup {
     # ######### #
@@ -61,10 +65,7 @@ function Start-Setup {
     $DATA_FOLDER_PATH = "$PSScriptRoot\$DATA_FOLDER_NAME"
 
     # KH Engine Params
-    $KHENGINE_REPO_URL = "https://github.com/narknon/UnrealEngine-CEEnd"
-    $KHENGINE_REPO_NAME = "UnrealEngine-CEEnd"
-    $KHENGINE_GITFILE_URL = "https://github.com/narknon/UnrealEngine-CEEnd.git"
-    $KHENGINE_BRANCH_NAME = "KHEngineBuilt"
+    # ...removed from constants. Will be dynamically chosen during script runtime
     $KHENGINE_FREESPACE_IN_GB = 25
 
     # uProject Params
@@ -89,7 +90,59 @@ function Start-Setup {
     # Helper Functions #
     # ################ #
 
-    Function Write-LogMessage () {
+    function Select-KHEngineRepo() {
+        try {
+            $KHEngineList = Get-Content $PSScriptRoot\KHEngine_Repos.txt -ErrorAction Stop
+        }
+        catch {
+            Write-LogMessage "Couldn't find repo list at $PSScriptRoot\KHEngine_Repos.txt. Creating default..." -Type Warning
+            @"
+# Enter list of KHEngine Destinations.
+# Important: One Engine per line.
+# Format: <title>,<URL to KHEngine Branch>
+# Example: NarkEngine (Default),https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt
+# Empty lines or lines starting with a # will be skipped.
+
+NarkEngine,https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt
+"@ | Out-File $PSScriptRoot\KHEngine_Repos.txt -Force
+            $KHEngineList = Get-Content $PSScriptRoot\KHEngine_Repos.txt
+        }
+        
+        # Read through repo list
+        $KHEngineList | ForEach-Object {
+            $str = $_.Trim()
+            # Skip line when necessary
+            if ((-not $str) -or ($str.StartsWith("#"))) {
+                return
+            }
+
+            # Extract content
+            Clear-Variable -Name Matches -ErrorAction SilentlyContinue
+            $str -match "(?<Title>.+),(?<URL>.+)" | Out-Null
+            
+            [PSCustomObject]@{
+                Title = $Matches["Title"].Trim()
+                URL   = $Matches["URL"].Trim()
+            }
+        } | Out-GridView -Title "Select your Engine" -OutputMode Single
+    }
+
+    function Test-KHEngineURL {
+        param (
+            [Parameter(Mandatory = $true)][String]$URL
+        )
+        $URL = $URL.Trim()
+        if ((-not [uri]::IsWellFormedUriString($URL, 'Absolute')) -and (-not $URL.EndsWith("KHEngineBuilt"))) {
+            Write-LogMessage "KHEngine URL is not valid. Make sure that it ends on ""KHEngineBuilt""" -Type Error
+            Write-LogMessage "Example: https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt" -Type Error
+            return $false
+        }
+        else {
+            return $true
+        }
+    }
+
+    function Write-LogMessage () {
 
         [CmdletBinding()]
         param (
@@ -103,25 +156,46 @@ function Start-Setup {
         )
 
         $TypeTags = @{
-            "Standard"    = "";
-            "Highlighted" = "";
-            "OK"          = "[OK] ";
-            "Info"        = "[INFO] ";
-            "Warning"     = "[WARNING] ";
-            "Error"       = "[ERROR] ";
+            "Standard"    = ""
+            "Highlighted" = ""
+            "OK"          = "[OK] "
+            "Info"        = "[INFO] "
+            "Warning"     = "[WARNING] "
+            "Error"       = "[ERROR] "
 
         }
 
         $TypeColor = @{
-            "Standard"    = [System.Console]::ForegroundColor;
+            "Standard"    = [System.Console]::ForegroundColor
             "Highlighted" = "Cyan"
-            "OK"          = "Green";
-            "Info"        = "Yellow";
-            "Warning"     = "Magenta";
-            "Error"       = "Red";
+            "OK"          = "Green"
+            "Info"        = "Yellow"
+            "Warning"     = "Magenta"
+            "Error"       = "Red"
         }
 
         Write-Host ("[{0:yyyy-MM-dd} {0:HH:mm:ss}] {1}{2}" -f (Get-Date), $TypeTags[$Type], $Message) -ForegroundColor $TypeColor[$Type]
+    }
+
+    function Get-GitDataFromRepoURL() {
+        param (
+            [Parameter(Mandatory = $true)]
+            [String]$URL
+        )
+
+        # Verify URL
+        if (-not [uri]::IsWellFormedUriString($URL, 'Absolute')) {
+            throw "Provided URL is not valid: $URL"
+        }
+
+        # Extract
+        $URLParts = $URL -split "/"
+        return [PSCustomObject]@{
+            GitFileURL = ($URLParts[0..4] -join "/") + ".git"
+            Author = $URLParts[3]
+            RepoName = $URLParts[4]
+            BranchName = $URLParts[6]
+        }
     }
 
     function Get-IntelCoreGeneration {
@@ -130,11 +204,11 @@ function Start-Setup {
             return [Math]::Floor($Matches.GenDigits / 1000)
         }
         else {
-            throw "No Intel® Core™ Processor found"
+            throw "No Intel Core Processor found"
         }
     }
 
-    Function Get-Folder($initialDirectory = "", $Title = "Select a folder") {
+    function Get-Folder($initialDirectory = "", $Title = "Select a folder") {
         [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms") | Out-Null
 
         $foldername = New-Object System.Windows.Forms.FolderBrowserDialog
@@ -147,7 +221,7 @@ function Start-Setup {
         return $folder
     }
 
-    Function Test-LongPathsEnabled {
+    function Test-LongPathsEnabled {
         # https://learn.microsoft.com/en-US/windows/win32/fileio/maximum-file-path-limitation?tabs=registry
         try {
             $RegValue = Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem -Name "LongPathsEnabled" -ErrorAction Stop
@@ -162,7 +236,7 @@ function Start-Setup {
         return $false
     }
 
-    Function Get-UESwitchVersionRegKey {
+    function Get-UESwitchVersionRegKey {
         New-PSDrive -PSProvider registry -Root HKEY_CLASSES_ROOT -Name HKCR -ErrorAction SilentlyContinue | Out-Null
         try {
             return Get-ItemProperty -Path HKCR:\Unreal.ProjectFile\shell\switchversion\command -Name "(default)" -ErrorAction Stop | Select-Object -ExpandProperty "(default)"
@@ -172,7 +246,7 @@ function Start-Setup {
         }
     }
 
-    Function Test-WritePermissions ($Path) {
+    function Test-WritePermissions ($Path) {
         Try { [io.file]::OpenWrite("$Path\test.txt").close(); Remove-Item "$Path\test.txt"; return $True }
         Catch { return $False; }
     }
@@ -181,19 +255,20 @@ function Start-Setup {
     # Main #
     # #### #
 
-    Write-Host "============================="
-    Write-Host " KH Engine+Project Installer "
-    Write-Host "============================="
-    Write-Host ""
-    Write-Host "This script automates the guide found at:"
-    Write-Host "https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button"
-    Write-Host ""
-    Write-Host "Read every output of this script carefully."
-    Write-Host "General Hints:"
-    Write-Host "    - If the script fails, it's recommended to delete the folders and files it created, fix the issue and start over."
-    Write-Host "    - Use at your own risk. Source code is open to read for anyone though."
-    Write-Host ""
+    Write-Host @"
+=============================
+ KH Engine+Project Installer 
+=============================
 
+This script automates the guide found at:
+https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button
+
+Read every output of this script carefully.
+General Hints:
+    - If the script fails, it's recommended to delete the folders and files it created, fix the issue and start over.
+    - Use at your own risk. Source code is open to read for anyone though.
+"@
+    # Verify user permissions
     if (-not (Test-WritePermissions -Path $PSScriptRoot)) {
         Write-LogMessage "User is missing write access on script location. Move the script to a different location and try again. Exiting..." -Type Error
         return
@@ -204,6 +279,29 @@ function Start-Setup {
         Write-LogMessage "Creating data folder..." -Type Info
         New-Item -Name $DATA_FOLDER_NAME -Path $PSScriptRoot -ItemType Directory | Out-Null
     }
+
+    ################################
+    # Selection for KHEngine Repo  #
+    ################################
+
+    Write-LogMessage "Select a KHEngine Repo... (Default: NarkEngine)" -Type Highlighted
+    Read-Host "Press enter to open selection screen"
+    $KHENGINE_REPO_URL = (Select-KHEngineRepo).URL
+    if (-not $KHENGINE_REPO_URL) {
+        Write-LogMessage "Selection was cancelled. Exiting..." -Type Error
+        return
+    }
+    elseif (-not (Test-KHEngineURL $KHENGINE_REPO_URL)) {
+        return
+    }
+    Write-LogMessage "You selected $KHENGINE_REPO_URL" -Type OK
+    
+    # Extracting data from Git URL
+    $GitRepoData = Get-GitDataFromRepoURL -URL $KHENGINE_REPO_URL
+    $KHENGINE_GITFILE_URL = $GitRepoData.GitFileURL
+    $KHENGINE_REPO_NAME = $GitRepoData.RepoName
+    $KHENGINE_BRANCH_NAME = $GitRepoData.BranchName
+    Write-Host ""
 
     ################################
     # 1. Check if git is available #
@@ -223,9 +321,9 @@ function Start-Setup {
     }
     Write-Host ""
     
-    ###################################### #
-    # Check if VS Studio 2017 is available #
-    ###################################### #
+    ######################################### #
+    # 2. Check if VS Studio 2017 is available #
+    ######################################### #
     Write-LogMessage "Checking for VS 2017 install..."  -Type Highlighted
 
     # Check for VSWhere tool
@@ -255,7 +353,6 @@ function Start-Setup {
     }
 
     Write-LogMessage "Downloaded VS 2017 installer successfully" -Type OK
-    Write-Host ""
     # Execute VSWhere
     $Output = & $VSWHERE_FILE_PATH | Out-String
 
@@ -319,7 +416,7 @@ Exiting...
     Write-Host ""
 
     ###################################################################################
-    # 2. Ask them where they want to install the engine with a dialog/directory popup # 
+    # 3. Ask them where they want to install the engine with a dialog/directory popup # 
     ###################################################################################
     Write-LogMessage "Checking for engine directory" -Type Highlighted
 
@@ -347,7 +444,7 @@ Exiting...
         }
         else {
             # all good. break the loop.
-            break;
+            break
         }
 
         # Not good. Retry...
@@ -360,7 +457,7 @@ Exiting...
 
 
     ###############################################################################################
-    # 3. Take path and use it to do the git clone command for the engine branch in a new console. # 
+    # 4. Take path and use it to do the git clone command for the engine branch in a new console. # 
     ###############################################################################################
 
     Write-LogMessage "Trying to git clone the engine repository..." -Type Highlighted
@@ -368,8 +465,12 @@ Exiting...
     Write-LogMessage "BEFORE you continue, make sure your GitHub account is linked to an Epic Games account. For details see:" -Type Info
     Write-LogMessage $UNREAL_ACCOUNT_LINK_URL -Type Info
     Write-LogMessage "Cloning could take a while." -Type Info
-    Read-Host -Prompt "Press Enter to start"
+    Read-Host -Prompt "Press Enter to confirm your accounts are linked and proceed."
+    Write-Host ""
 
+    Write-LogMessage "KHENGINE_BRANCH_NAME: $KHENGINE_BRANCH_NAME" -Type Info
+    Write-LogMessage "KHENGINE_GITFILE_URL: $KHENGINE_GITFILE_URL" -Type Info
+    
     # Letsa go!
     # Synchronous call:
     Remove-Variable CloneOutput -Force -ErrorAction SilentlyContinue
@@ -417,7 +518,7 @@ Exiting...
     ########################################################################
     # 5. If continue, ask where they want to install project with a dialog # 
     ########################################################################
-    Write-LogMessage "Checking for project directory"
+    Write-LogMessage "Checking for project directory" -Type Highlighted
 
     Remove-Variable ProjectPath -Force -ErrorAction SilentlyContinue
     while ($True) {
@@ -458,7 +559,7 @@ Exiting...
     Write-Host ""
 
     #########################################
-    # Run git clone for that in new console # 
+    # 6. Run git clone for that in new console # 
     #########################################
 
     Write-LogMessage "Trying to git clone the project repository..."
@@ -501,9 +602,9 @@ Exiting...
 
     Write-Host ""
 
-    #####################
-    # Calling Setup.bat # 
-    #####################
+    ########################
+    # 7. Calling Setup.bat # 
+    ########################
 
     Write-LogMessage "Trying to launch setup.bat to initialize engine..."
     Write-LogMessage "This will also launch a UAC prompt for elevated permissions." -Type Info
@@ -513,25 +614,25 @@ Exiting...
     & $EnginePath\$KHENGINE_REPO_NAME\setup.bat *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
     Write-Host ""
 
-    #####################
-    # 10. Run generateprojectfiles.bat, wait for it to finish
-    #####################
+    ##########################################################
+    # 8. Run generateprojectfiles.bat, wait for it to finish #
+    ##########################################################
 
     Write-LogMessage "Generating project files via generateprojectfiles.bat... (duh)"
     & $EnginePath\$KHENGINE_REPO_NAME\GenerateProjectFiles.bat *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
     Write-Host ""
 
-    # ########################################################## #
-    # Run unrealversionselector.exe from within the engine path. #
-    # ########################################################## #
+    #################################################################
+    # 9. Run unrealversionselector.exe from within the engine path. #
+    #################################################################
 
     Write-LogMessage "Registering KHEngine build via UnrealVersionSelector-Win64-Shipping.exe..."
     & $EnginePath\$KHENGINE_REPO_NAME\Engine\Binaries\Win64\UnrealVersionSelector-Win64-Shipping.exe /register *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
     Write-Host ""
 
-    # ################################ #
-    # Switch new project to new engine #
-    # ################################ #
+    ########################################
+    # 10. Switch new project to new engine #
+    ########################################
 
     Write-LogMessage "Switching KHProject to KHEngine..."
 
@@ -550,12 +651,12 @@ Exiting...
     }
     Write-Host ""
     
-    # ##################################### #
-    # Check Processor for Incompatibilities #
-    # ##################################### #
+    #############################################
+    # 11. Check Processor for Incompatibilities #
+    #############################################
     
     # For details see https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md#installation-was-succesful-and-sln-generates-but-project-wont-launch
-    # According to OpenKH discord, Intel Core Gen 10 and higher is affected
+    # According to OpenKH discord, Intel Core Gen 10 and higher is affected.
     
     Write-LogMessage "Checking processor version..."
 
@@ -563,16 +664,18 @@ Exiting...
         $ProcGen = Get-IntelCoreGeneration -ge 10
 
         if ($ProcGen -ge 10) {
-            Write-LogMessage "Processor is an Intel® Core™ Processor Gen 10 or higher." -Type Warning
+            Write-LogMessage "Processor is an Intel� Core� Processor Gen 10 or higher." -Type Warning
             Write-LogMessage "UE Launcher is known to have issues with those. Adjusting OpenSSL settings via environment variable is strongly recommended." -Type Warning
             $Answer = Read-Host -Prompt "Add environment variable OPENSSL_ia32cap now? You'll be asked for elevated permissions. (Y/N)"
             if ($Answer.ToLower() -eq "y") {
                 Start-Process powershell -ArgumentList "-Command ""[System.Environment]::SetEnvironmentVariable('OPENSSL_ia32cap',':~0x20000000d',[System.EnvironmentVariableTarget]::Machine)""" -Verb runAs             
-            } else {
+            }
+            else {
                 Write-LogMessage "If launching UE fails, set the system variable manually. Name: ""OPENSSL_ia32cap"". Value: "":~0x20000000d"" (both without quotes)"
             }
         }
-    } catch {
+    }
+    catch {
         # No Intel Core. No problem.
     }
 
@@ -588,13 +691,18 @@ Exiting...
     }
 }
 
-$LogFilePath = "$PSScriptRoot\NarkEngine_Install-$(Get-Date -Format "yyyyMMddHHmm").log"
+# ######### #
+# Execution #
+# ######### #
+Remove-Item $PSScriptRoot\tmp.log -ErrorAction SilentlyContinue | Out-Null
+$LogFilePath = "$PSScriptRoot\KHEngineInstall-$(Get-Date -Format "yyyyMMddHHmm").log"
 Start-Transcript "$PSScriptRoot\tmp.log" | Out-Null
 Start-Setup
 Stop-Transcript | Out-Null
 
 Write-Host ""
-#Workaround to remove personal data
-get-content "$PSScriptRoot\tmp.log" | Select-Object -skip 18 | Set-content $LogFilePath
+# Workaround to remove personal data from log file
+Get-Content "$PSScriptRoot\tmp.log" | Select-Object -Skip 18 | Set-Content $LogFilePath
 Write-Host "Log file created at $LogFilePath"
+Remove-Item $PSScriptRoot\tmp.log -ErrorAction SilentlyContinue | Out-Null
 Write-Host "Done. You may close this window."

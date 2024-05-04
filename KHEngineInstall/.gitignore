@@ -1,0 +1,6 @@
+# Ignore temp file from KHEngine Install script
+**/temp.vsconfig
+**/vs_community_2017.exe
+**/vswhere.exe
+**/*EngineInstall/*.log
+KHEngineInstall on *.url
