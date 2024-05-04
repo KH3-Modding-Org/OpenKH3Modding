@@ -22,95 +22,50 @@ I highly recommend following option 2, as you can update with the click of a but
 
 ## Misc. Resources and Tools
 
-uModel (Model/Texture/Animation Viewer): https://www.gildor.org/en/projects/umodel
+| Name | Description |
+| -----| ------------|
+| [AssetEditor](https://github.com/kaiheilos/Utilities) | Asset Editor with export/import of asset structs
+| [AudioMog](https://github.com/Yoraiz0r/AudioMog) | Editor for audio assets
+| [FModel](https://fmodel.app/) | Asset Parser and Model/Texture Viewer) |
+| [JPEXS](https://github.com/jindrapetrik/jpexs-decompiler) | Editor for SWF/Scaleform assets
+| [UAssetAPI](https://github.com/atenfyr/UAssetAPI) | .NET Library. Same features as UAssetGUI.
+| [UAssetGUI](https://github.com/atenfyr/UAssetGUI) | Asset Editor and Parser with advanced asset editing through json serialization
+| [uModel](https://www.gildor.org/en/projects/umodel) | Model/Texture/Animation Viewer |
 
-FModel (Asset Parser and Model/Texture Viewer): https://fmodel.app/
+## Modding Tutorials
 
-UAssetGUI (Asset Editor and Parser with advanced asset editing through json serialization): https://github.com/atenfyr/UAssetGUI
+| Category | Name | Author |
+|----------|------|--------|
+| Weapons | [Custom Weapon Models v4 (YouTube)](https://www.youtube.com/watch?v=mE6zjN6dsJA) |  Dallin1016 ([Twitter](https://twitter.com/dallin1016), [YouTube](https://www.youtube.com/@dallin1016))
+|Weapons | [Custom Skeletons for Custom Weapons (YouTube)](https://www.youtube.com/watch?v=uFgW6MZNTaE) | Dallin1016 ([Twitter](https://twitter.com/dallin1016), [YouTube](https://www.youtube.com/@dallin1016))
+|Weapons | [Simple Weapon Material Guide (Google Docs)](https://docs.google.com/document/d/1IToouvZnqmAXFh2QOKWv0yefHRBWWvMKnXKIWR9sZu4) | Aproydtix
+| Texture/Material | [Stained Glass Editing (PDF)](/PDF%20Tutorials/Stained_Glass_Tutorial%20by%20dedede123.pdf) | dedede123 |
+| Texture/Material | [Change Hair and Eye Colours (PDF)](/PDF%20Tutorials/Change_Hair_and_Eyes_Colours_Guide%20by%20Richy5.pdf) | Richy5 ([YouTube](http://www.youtube.com/@ricknick)) |
+| Other | [Quick and Dirty KH3 Scaleform Guide (Google Docs)](https://docs.google.com/document/d/1OJ6guQR7HqA2Gn0SVzfwJzQyAqvKd5z-r3_jDdziF7Y/edit) | YuriLewd
 
-AssetEditor (Asset Editor with export/import of asset structs): https://github.com/kaiheilos/Utilities
-
-
-## Weapon Modding
-
-### [Kingdom Hearts III Modding Tutorial - Custom Weapon Models v3](https://www.youtube.com/watch?v=y0gY-ZY-QU8) (YouTube) by Dallin1016 - https://twitter.com/dallin1016
-
-### [KH3 Modding Tutorial - Custom Skeletons for Custom Weapons](https://www.youtube.com/watch?v=uFgW6MZNTaE) (YouTube) by Dallin1016 - https://twitter.com/dallin1016
-
-### [Simple Weapon Material Guide](https://docs.google.com/document/d/1IToouvZnqmAXFh2QOKWv0yefHRBWWvMKnXKIWR9sZu4) (Google Doc) by Aproydtix
-
-
-## Texture/Material Modding
-
-### [Stained Glass Editing Tutorial](/PDF%20Tutorials/Stained_Glass_Tutorial%20by%20dedede123.pdf) by dedede123 from OpenKH Discord
-
-
-### [Change Hair and Eye Colours Guide](/PDF%20Tutorials/Change_Hair_and_Eyes_Colours_Guide%20by%20Richy5.pdf)) by Richy5 from OpenKH Discord
-
-
-
-# Contributors
-
-
-
-### Tutorials
-
-Dallin1016 - [YouTube](https://www.youtube.com/user/Minecrafter1016) / [Twitter](https://twitter.com/dallin1016) - Custom Weapons
-
-Aproydtix - Various tutorials
-
-Dedede123 - Stained Glass tutorial
-
-Richy5 - [YouTube](https://www.youtube.com/channel/UCfgnQf_HcETmusIo_fx_Npw) - Hair and eye color guide
-
-Narknon - Engine Installation
+## Additional Contributors
 
 ### Custom Engine and uProject Work
-Joseph
+- Joseph
+- Narknon
 
-Narknon
-
-
-
-
-
-# Ignore everything below this as it is not done.
+## WIP Topics
+<details>
+<summary>Ignored for now</summary>
 
 ### uProject and Engine Source Edits
 
-To customize the engine source to make additional fields BP accessible, see [here](https://github.com/narknon/OpenKH3Modding/blob/main/).
+To customize the engine source to make additional fields BP accessible, see [here](https://github.com/narknon/OpenKH3Modding/blob/main/)
 
-### [Installing Custom Uncooked Content](/Installing%20Custom%20Uncooked%20Content.md#L1)
+### Other
 
-
-
-### Non-Editor Asset Editing
-
-
-
-### uProject and Engine Source Edits
-
-
-
-### Packaging Mods
-
-
-### Using the Mod Loader
-
-
-### Creating BP mods for the Mod Loader
-
-
-### Custom Physics
-
-
-### Replacing Music and Sounds
-
-
-### Animation Editing and Notifies
-
-
-
-
-
-
+- [Installing Custom Uncooked Content](/Installing%20Custom%20Uncooked%20Content.md#L1)
+- Non-Editor Asset Editing
+- uProject and Engine Source Edits
+- Packaging Mods
+- Using the Mod Loader
+- Creating BP mods for the Mod Loader
+- Custom Physics
+- Replacing Music and Sounds
+- Animation Editing and Notifies
+</details>
