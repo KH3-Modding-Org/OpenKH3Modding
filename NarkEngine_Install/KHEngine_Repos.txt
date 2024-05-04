@@ -1,0 +1,10 @@
+# Enter list of KHEngine Destinations.
+# Important: One Engine per line.
+# Format: <title>,<URL to KHEngine Branch>
+# Example: NarkEngine (Default),https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt
+# Empty lines or lines starting with a # will be skipped.
+
+NarkEngine,https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt
+RynEngine,https://github.com/WistfulHopes/UnrealEngine/tree/KHEngineBuilt
+WillowEngine,https://github.com/Lotruees/UnrealEngine-CEEnd/tree/KHEngineBuilt
+AproEngine,https://github.com/Aproydtix/UnrealEngine/tree/KHEngineBuilt
