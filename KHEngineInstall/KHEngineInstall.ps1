@@ -261,7 +261,7 @@ NarkEngine,https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt
 =============================
 
 This script automates the guide found at:
-https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button
+https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/Tutorials/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button
 
 Read every output of this script carefully.
 General Hints:
@@ -391,7 +391,7 @@ General Hints:
         $VSConfig = Get-Content $VSCONFIG_FILE_PATH -ErrorAction Stop | ConvertFrom-Json
         
         # Check workload and components individually first
-        # https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md#install-visual-studio-2017
+        # https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/Tutorials/uProject%20and%20Engine%20Installation.md#install-visual-studio-2017
         $IncludesCPPGameDev = $VSConfig.Components -Contains "Microsoft.VisualStudio.Workload.NativeGame" # Game development with C++
         $IncludesCPPProfiling = $VSConfig.Components -Contains "Microsoft.VisualStudio.Component.VC.DiagnosticTools" # C++ profiling tools
         $IncludesUnreal = $VSConfig.Components -Contains "Component.Unreal" # Unreal Engine Installer
@@ -655,7 +655,7 @@ Exiting...
     # 11. Check Processor for Incompatibilities #
     #############################################
     
-    # For details see https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md#installation-was-succesful-and-sln-generates-but-project-wont-launch
+    # For details see https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/Tutorials/uProject%20and%20Engine%20Installation.md#installation-was-succesful-and-sln-generates-but-project-wont-launch
     # According to OpenKH discord, Intel Core Gen 10 and higher is affected.
     
     Write-LogMessage "Checking processor version..."

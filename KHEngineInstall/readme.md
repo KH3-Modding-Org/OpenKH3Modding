@@ -3,7 +3,7 @@
 
 Here's a helper script to install the Custom Unreal Engine (aka NarkEngine / KHEngine) and Unreal Project (aka TresGame) for Kingdom Hearts 3. 🙂 
 
-The tool automates the steps descibed in the guide for [uProject and Engine installation via GitHub](https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button). Common pitfalls are checked and avoided.
+The tool automates the steps descibed in the guide for [uProject and Engine installation via GitHub](https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/Tutorials/uProject%20and%20Engine%20Installation.md#2-github-clone-install---update-with-the-click-of-a-button). Common pitfalls are checked and avoided.
 
 #### Steps (provided by @Narknon)
 1) Select which engine repository to use (NarkEngine / RynEngine / ...). Use NarkEngine if you don't know which one to pick!
@@ -25,7 +25,7 @@ The tool automates the steps descibed in the guide for [uProject and Engine inst
 - Plenty of disk space (~20GB)
 
 ## How to run?
-1) Download the [latest release](https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/KHEngineInstall/KHEngineInstall.zip)
+1) Download the [latest release](https://github.com/KH3-Modding-Org/OpenKH3Modding/raw/main/KHEngineInstall/KHEngineInstall.zip)
 2) Extract archive to disk
 3) Run start.bat
 4) Follow the on-screen prompts closely and it should guide you through.
