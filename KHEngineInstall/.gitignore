@@ -2,5 +2,5 @@
 **/temp.vsconfig
 **/vs_community_2017.exe
 **/vswhere.exe
-**/*EngineInstall/*.log
+*.log
 KHEngineInstall on *.url
