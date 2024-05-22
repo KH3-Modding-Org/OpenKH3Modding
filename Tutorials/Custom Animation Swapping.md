@@ -10,9 +10,7 @@ Based on original notes by Accel and Aproydtix from the OpenKH Discord. This tut
   - Offered by universities for students
   - Aproydtix’s 3ds max scripts (#resources channel in the [openKH discord](https://discord.openkh.dev/))
 - OR Blender 2.9 and 2.8 (not yet supported in this tutorial)
-- [**Unreal Engine 4.17.2**](https://www.unrealengine.com/en-US/download?sessionInvalidated=true)
-  - [**Russll’s TresGame Uproject**](https://github.com/RussellJerome/TresGame)
-  - [**Visual Studio Community 2017**](https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads) **(Microsoft Account Required)**
+- Custom Unreal Engine and TresGame. For an installer see [KHEngineInstall](../KHEngineInstall)
 - [**State of Decay 2 Asset Editor**](https://github.com/kaiheilos/Utilities)
 - [**UnrealPak**](https://drive.google.com/file/d/1MwnXT_j1UW9VrnQal_DvLiNVRjVjdxmv/view?usp=sharing) **or PatchPack**
 
@@ -177,7 +175,7 @@ As with the .psk file, a new FBX folder with the **animation** inside should be 
 
 # Setting up Visual Studio 2017 & Unreal Engine 4.17.2
 
-Before proceeding make sure you have the KHEngine and TresGame installed. For an installer see [KHEngineInstall](..\KHEngineInstall)
+Before proceeding make sure you have the KHEngine and TresGame installed. For an installer see [KHEngineInstall](../KHEngineInstall)
 
 Continue here once you have opened ``TresGame.uproject``.
 
