@@ -36,6 +36,7 @@ I highly recommend following option 2, as you can update with the click of a but
 
 | Category | Name | Author |
 |----------|------|--------|
+| Animations | [Custom Animation Swapping](/Tutorials/Custom%20Animation%20Swapping.md) | Accel, Aproydtix
 | Weapons | [Custom Weapon Models v4 (YouTube)](https://www.youtube.com/watch?v=mE6zjN6dsJA) |  Dallin1016 ([Twitter](https://twitter.com/dallin1016), [YouTube](https://www.youtube.com/@dallin1016))
 | Weapons | [Custom Skeletons for Custom Weapons (YouTube)](https://www.youtube.com/watch?v=uFgW6MZNTaE) | Dallin1016 ([Twitter](https://twitter.com/dallin1016), [YouTube](https://www.youtube.com/@dallin1016))
 | Weapons | [Simple Weapon Material Guide (Google Docs)](https://docs.google.com/document/d/1IToouvZnqmAXFh2QOKWv0yefHRBWWvMKnXKIWR9sZu4) | Aproydtix
