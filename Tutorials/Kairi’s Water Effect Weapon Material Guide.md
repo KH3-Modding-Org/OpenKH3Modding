@@ -7,7 +7,6 @@ Content provided by [DaXx](https://www.youtube.com/@daxx2756)
 - Custom built of [UassetGUI](https://www.mediafire.com/file/dayra532z63y5t6/UassetGUI.zip/file)
 - My [Custom Water Effect Materials](https://www.mediafire.com/file/euieb6jscy3xj3z/Custom+Water+Mat.zip/file)
 
-
 It is assumed that you have followed the Custom Weapon guide, or know how to import weapons already for this guide.
 
 [Kingdom Hearts III Modding Tutorial - Custom Weapon Models v3](https://www.youtube.com/watch?v=y0gY-ZY-QU8&t=0s&ab_channel=dallin1016)
@@ -31,7 +30,7 @@ To keep it simple, in my example the ``UV_SINGLE`` Channel and the ``EXTRAUVS0``
 
 ### Texture and Mask (with UV Layout)
 
-<insert image>
+<img width="431" alt="image" src="https://github.com/KH3-Modding-Org/OpenKH3Modding/assets/6775975/1a837b82-8cc3-42cb-b69e-8100535905fd">
 
 The left image shows the Diffuse Texture with the UV Layout. The right image shows the Mask for the effect.
 
@@ -47,24 +46,24 @@ Here the custom build of UassetGUI comes into play.
 1. Open **w_dx000_mat1** and go to the **Name Map Section**
 1. Edit the highlighted fields to match the location of your **Cooked** textures and do the same for the last highlighted entry except that you’re giving it the Name of your Material Instance (without \_Inst in the end).
 
-    <insert image>
+    ![image](https://github.com/KH3-Modding-Org/OpenKH3Modding/assets/6775975/4e194046-c810-4230-b3dd-0afefb147cdd)
 
 1. Next up scroll all the way down until you see the texture names and do the exact same except that you’re not typing in the full paths this time:
 
-    <insert image>
+    ![image](https://github.com/KH3-Modding-Org/OpenKH3Modding/assets/6775975/04227246-2fae-4f3e-9207-590f90cf41fa)
 
 ### w_dx000_mat1_Inst
 
 For this one we are going to use SoD2:
 
 1. In the top right of the Window set the Version to 4.17!
-1. Repeat the same steps you did for **w_dx000_mat1** except this time you’ll only find the path to the diffuse texture, the main Material this one is an Instance of and again the Material Instances path on the top in the **Headers List:**
+1. Repeat the same steps you did for **w_dx000_mat1** except this time you’ll only find the path to the diffuse texture, the main Material this one is an Instance of and again the Material Instances path on the top in the **Headers List**
 
-    **<insert image>**
+    ![image](https://github.com/KH3-Modding-Org/OpenKH3Modding/assets/6775975/52fe65a4-4ca4-4563-acde-4255dfbee9b2)
 
 1. After that scroll down and repeat the same steps as for **w_dx000_mat1** once again and Save:
 
-<insert image>
+    ![image](https://github.com/KH3-Modding-Org/OpenKH3Modding/assets/6775975/5b099aa3-96c6-4ec8-8643-08131c0d0a3c)
 
 ## Step 3: Replace your Materials with the edited Materials
 
@@ -72,9 +71,9 @@ After everything above has been done, you’re ready to Pak your mod.
 
 ## Final Result
 
-<insert image>
+<img width="139" alt="image" src="https://github.com/KH3-Modding-Org/OpenKH3Modding/assets/6775975/00bd4a3c-502c-4d66-a09a-7c65824d0e7f">
 
 You can see an example of the applied material at:
 <https://www.youtube.com/watch?v=74j2iBSqZQA&ab_channel=DaXx>
 
-Congrats, you’ve done it.
+Congrats, you’ve done it!
