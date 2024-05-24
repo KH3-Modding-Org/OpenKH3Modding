@@ -45,6 +45,11 @@ I highly recommend following option 2, as you can update with the click of a but
 | Other | [Scaleform Quick Guide](/Tutorials/Scaleform%20Quick%20Guide.md) | YuriLewd
 | Characters  | [Skeleton Compatibility Guide](/Tutorials/Skeleton%20Compatibility.md) | dh
 
+## Related Resourced
+
+- [TresGame Whitepages](https://kh3-map-crew.github.io/TresGame-Whitepages/) - Reference documentation for modding KH3 through Unreal Engine
+- [AtlasPak](https://github.com/KH3-Map-Crew/KH3-atlas-pak) - A dependency mod for KH3 custom map compatability
+
 ## Additional Contributors
 
 ### Custom Engine and uProject Work
