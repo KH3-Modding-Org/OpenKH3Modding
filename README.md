@@ -47,6 +47,7 @@ I highly recommend following option 2, as you can update with the click of a but
 | Weapons | [Custom Weapon Models v4 (YouTube)](https://www.youtube.com/watch?v=mE6zjN6dsJA) |  Dallin1016 ([Twitter](https://twitter.com/dallin1016), [YouTube](https://www.youtube.com/@dallin1016))
 | Weapons | [Custom Skeletons for Custom Weapons (YouTube)](https://www.youtube.com/watch?v=uFgW6MZNTaE) | Dallin1016 ([Twitter](https://twitter.com/dallin1016), [YouTube](https://www.youtube.com/@dallin1016))
 | Weapons | [Simple Weapon Material Guide (Google Docs)](https://docs.google.com/document/d/1IToouvZnqmAXFh2QOKWv0yefHRBWWvMKnXKIWR9sZu4) | Aproydtix
+| Weapons | [Kairi's Water Effect Weapon Material Guide](/Tutorials/Kairi’s%20Water%20Effect%20Weapon%20Material%20Guide.md) | DaXx
 | Texture/Material | [Stained Glass Editing (PDF)](/Tutorials/PDF/Stained_Glass_Tutorial%20by%20dedede123.pdf) | dedede123 |
 | Texture/Material | [Change Hair and Eye Colours (PDF)](/Tutorials/PDF/Change_Hair_and_Eyes_Colours_Guide%20by%20Richy5.pdf) | Richy5 ([YouTube](http://www.youtube.com/@ricknick)) |
 | Other | [Scaleform Quick Guide](/Tutorials/Scaleform%20Quick%20Guide.md) | YuriLewd
