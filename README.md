@@ -32,6 +32,13 @@ I highly recommend following option 2, as you can update with the click of a but
 | [UAssetGUI](https://github.com/atenfyr/UAssetGUI) | Asset Editor and Parser with advanced asset editing through json serialization
 | [uModel](https://www.gildor.org/en/projects/umodel) | Model/Texture/Animation Viewer |
 
+## Scripts
+
+| Name | Description |
+|------| ------------|
+| [KHEngineInstall](/KHEngineInstall/) | Installer for custom Unreal Engine and uProject |
+| [Invoke-SkeletonCompatibility](/Invoke-SkeletonCompatibility/) | Helper to add skeleton compatibility between assets. (ALPHA!) |
+
 ## Modding Tutorials
 
 | Category | Name | Author |
