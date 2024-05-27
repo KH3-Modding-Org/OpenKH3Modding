@@ -20,8 +20,6 @@ The target pawn's skeleton (uasset+exp) will be in the script root.
 
 You can find pawn IDs at: https://openkh.dev/kh3/pawns.html
 
-The modified script 
-
 ## License Info
 This code is released under [The Unlicense](https://unlicense.org/). This does not apply to the 3rd party tools which are used but not included.
 ```
