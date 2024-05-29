@@ -27,6 +27,15 @@ This guide assumes you have the latest custom Unreal Engine and TresGame install
 
 The asset can now be renamed, edited and cooked for further use.
 
+## Supported Asset Types
+- Textures
+- Datatables
+- Effects
+- Materials
+- ...and more
+
 ## Unsupported Asset Types
 Unsupported asset types can either not be loaded in UE in its cooked form or otherwise crash the engine/game.
 - Blueprints
+- Sound Files
+- ...and probably more
