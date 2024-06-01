@@ -12,8 +12,8 @@ A helper to quickly add compatibility between skeletons. It uses UModel and UAss
 
 
 ## How to run it?
-1) Open the script and adjust the constants
-2) Run it in PowerShell. (Example: Via Rightclick > Run with PowerShell)
+1) Create "AES.txt" in the script root folder. Put only the game's AES key inside. No new lines or anything!
+2) Run the script in PowerShell. (Example: Via Rightclick > Run with PowerShell)
 3) Enter the screen prompts for target pawn and source pawn
 
 The target pawn's skeleton (uasset+exp) will be in the script root.
