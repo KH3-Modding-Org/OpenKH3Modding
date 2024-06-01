@@ -3,7 +3,12 @@
 #############
 
 # Game
-$GAME_AES_KEY = ""
+$GAME_AES_KEY = Get-Content $PSScriptRoot\AES.txt -ErrorAction SilentlyContinue
+if (!$GAME_AES_KEY) {
+    New-Item -ItemType File -Path "$PSScriptRoot\AES.txt" -Force | Out-Null
+    throw "AES Key missing or invalid. Add it to AES.txt in the script root."
+    return
+}
 $GAME_PAK_PATH = "C:\Program Files\Epic Games\KH_3\KINGDOM HEARTS III\Content\Paks"
 
 # UModel
@@ -261,11 +266,6 @@ function Export-UEPawnPackage {
 # MAIN #
 # #### #
 
-# Check for AES Key
-if (!$GAME_AES_KEY){
-    throw "AES Key is empty. Add it to the top of the script!"
-}
-
 # Get Skeleton UAsset via Umodel
 $TargetPawnID = Read-Host -Prompt "Enter Target Pawn where SkelCompat should be added (e.g.: n_he204)"
 
@@ -273,12 +273,12 @@ $TargetPawnID = Read-Host -Prompt "Enter Target Pawn where SkelCompat should be 
 $CompatiblePawnID = Read-Host -Prompt "Enter Source Pawn whose skeleton will be referenced (e.g.: e_ex304)"
  switch ($CompatiblePawnID[0]) {
     "n" { $Subfolder = "npc"  }
-    "e" { $Subfolder = "npc"  }
+    "e" { $Subfolder = "enemy"  }
     "p" {  $Subfolder = "pc" }
     Default {throw "Pawn could not be identified..."; return}
  }
 $CompatSkelName = "$($CompatiblePawnID)_0_Skeleton"
-$CompatSkelPath = "/Game/Character/$Subfolder/p_ex001/mdl/$CompatSkelName"
+$CompatSkelPath = "/Game/Character/$Subfolder/$CompatiblePawnID/mdl/$CompatSkelName"
 
 # Get Asset and Add Skeleton Compatibility
 $AssetFilePath = Save-UEPawnPackage -PawnID $TargetPawnID -Type Skeleton -Out $PSScriptRoot
