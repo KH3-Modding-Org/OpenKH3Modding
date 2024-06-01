@@ -1,4 +1,6 @@
-*.uasset
-*.uexp
-*.json
-AES.txt
+# Ignore all
+*
+
+# Except for script files
+!*.ps1
+!*.md
