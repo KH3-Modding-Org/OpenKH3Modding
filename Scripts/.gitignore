@@ -4,3 +4,4 @@
 # Except for script files
 !*.ps1
 !*.md
+!*.gitignore
