@@ -27,22 +27,26 @@
                       git.exe in path
                       Plenty of disk space (~20GB)
 
-    Changes:        : 2024-05-02
+    Changes:        : 2025-08-16
+                      - Removed engine selection. Nark is the way to go.
+                      - Fixed handling of folder paths with spaces in them
+
+                      2024-05-02
                       - Added selection for multiple KHEngines.
                       - Renamed to KHEngine Install.
 
-                       2022-12-08
+                      2022-12-08
                       - Added transcript logging, more checks, refactored code. Harmonized output using Write-LogMessage
                       - Downloads vswhere to avoid redistributing the file directly
                       - Added start.bat for simpler start + dealing with execution policy
 
                       2022-11-06
-                      - Added VS 2017 install
+                      - Added VS install
 
                       2022-11-05
                       - Alpha Release
     
-    Known Issues    : - VS 2017 detection logic may fail when theres multiple VS 2017 installs
+    Known Issues    : - VS detection logic may fail when theres multiple VS installs
 
     TODOs           : - Add more prerequisite checks?
                       - Make cloning a function to avoid code repition.
@@ -61,71 +65,30 @@ function Start-Setup {
     # ######### #
 
     # Script's data folder. Used for temp files, supplied configs, ...
-    $DATA_FOLDER_NAME = "data"
-    $DATA_FOLDER_PATH = "$PSScriptRoot\$DATA_FOLDER_NAME"
+    $DATA_FOLDER_NAME          = "data"
+    $DATA_FOLDER_PATH          = "$PSScriptRoot\$DATA_FOLDER_NAME"
 
-    # KH Engine Params
-    # ...removed from constants. Will be dynamically chosen during script runtime
-    $KHENGINE_FREESPACE_IN_GB = 25
-
-    # uProject Params
-    $KHPROJECT_REPO_URL = "https://github.com/KH3-Modding-Org/TresGame"
-    $KHPROJECT_REPO_NAME = "TresGame"
-    $KHPROJECT_GITFILE_URL = "https://github.com/KH3-Modding-Org/TresGame.git"
-    $KHPROJECT_BRANCH_NAME = "TresGame-Built"
+    # KH Engine + Project Params
+    # Note: URLs must link to the branch needed
+    $KHENGINE_REPO_URL         = "https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt"
+    $KHPROJECT_REPO_URL        = "https://github.com/KH3-Modding-Org/TresGame/tree/TresGame-Built"
+    $KHENGINE_FREESPACE_IN_GB  = 25
     $KHPROJECT_FREESPACE_IN_GB = 1.5
 
     # Other
-    $UNREAL_ACCOUNT_LINK_URL = "https://www.unrealengine.com/en-US/ue-on-github"
-    $GIT_DL_URL = "https://git-scm.com/download/win"
+    $UNREAL_ACCOUNT_LINK_URL   = "https://www.unrealengine.com/en-US/ue-on-github"
+    $GIT_DL_URL                = "https://git-scm.com/download/win"
 
-    $VS2017_DL_URL = "https://aka.ms/vs/15/release/vs_community.exe"
-    $VS2017_INSTALLER_PATH = "$DATA_FOLDER_PATH\vs_community_2017.exe"
-    $WIN10_SDK_MIN_BUILD_VER = 17763
+    $VS_DL_URL                 = "https://aka.ms/vs/15/release/vs_community.exe"
+    $VS_INSTALLER_PATH         = "$DATA_FOLDER_PATH\vs_community.exe"
+    $WIN10_SDK_MIN_BUILD_VER   = 17763
 
-    $VSWHERE_FILE_PATH = "$DATA_FOLDER_PATH\vswhere.exe"
-    $VSWHERE_DL_URL = "https://github.com/microsoft/vswhere/releases/latest/download/vswhere.exe"
+    $VSWHERE_FILE_PATH         = "$DATA_FOLDER_PATH\vswhere.exe"
+    $VSWHERE_DL_URL            = "https://github.com/microsoft/vswhere/releases/latest/download/vswhere.exe"
 
     # ################ #
     # Helper Functions #
     # ################ #
-
-    function Select-KHEngineRepo() {
-        try {
-            $KHEngineList = Get-Content $PSScriptRoot\KHEngine_Repos.txt -ErrorAction Stop
-        }
-        catch {
-            Write-LogMessage "Couldn't find repo list at $PSScriptRoot\KHEngine_Repos.txt. Creating default..." -Type Warning
-            @"
-# Enter list of KHEngine Destinations.
-# Important: One Engine per line.
-# Format: <title>,<URL to KHEngine Branch>
-# Example: NarkEngine (Default),https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt
-# Empty lines or lines starting with a # will be skipped.
-
-NarkEngine,https://github.com/narknon/UnrealEngine-CEEnd/tree/KHEngineBuilt
-"@ | Out-File $PSScriptRoot\KHEngine_Repos.txt -Force
-            $KHEngineList = Get-Content $PSScriptRoot\KHEngine_Repos.txt
-        }
-        
-        # Read through repo list
-        $KHEngineList | ForEach-Object {
-            $str = $_.Trim()
-            # Skip line when necessary
-            if ((-not $str) -or ($str.StartsWith("#"))) {
-                return
-            }
-
-            # Extract content
-            Clear-Variable -Name Matches -ErrorAction SilentlyContinue
-            $str -match "(?<Title>.+),(?<URL>.+)" | Out-Null
-            
-            [PSCustomObject]@{
-                Title = $Matches["Title"].Trim()
-                URL   = $Matches["URL"].Trim()
-            }
-        } | Out-GridView -Title "Select your Engine" -OutputMode Single
-    }
 
     function Test-KHEngineURL {
         param (
@@ -281,29 +244,6 @@ General Hints:
     }
 
     ################################
-    # Selection for KHEngine Repo  #
-    ################################
-
-    Write-LogMessage "Select a KHEngine Repo... (Default: NarkEngine)" -Type Highlighted
-    Read-Host "Press enter to open selection screen"
-    $KHENGINE_REPO_URL = (Select-KHEngineRepo).URL
-    if (-not $KHENGINE_REPO_URL) {
-        Write-LogMessage "Selection was cancelled. Exiting..." -Type Error
-        return
-    }
-    elseif (-not (Test-KHEngineURL $KHENGINE_REPO_URL)) {
-        return
-    }
-    Write-LogMessage "You selected $KHENGINE_REPO_URL" -Type OK
-    
-    # Extracting data from Git URL
-    $GitRepoData = Get-GitDataFromRepoURL -URL $KHENGINE_REPO_URL
-    $KHENGINE_GITFILE_URL = $GitRepoData.GitFileURL
-    $KHENGINE_REPO_NAME = $GitRepoData.RepoName
-    $KHENGINE_BRANCH_NAME = $GitRepoData.BranchName
-    Write-Host ""
-
-    ################################
     # 1. Check if git is available #
     ################################
     Write-LogMessage "Checking for git command..." -Type Highlighted
@@ -321,10 +261,10 @@ General Hints:
     }
     Write-Host ""
     
-    ######################################### #
-    # 2. Check if VS Studio 2017 is available #
-    ######################################### #
-    Write-LogMessage "Checking for VS 2017 install..."  -Type Highlighted
+    ######################################## #
+    # 2. Check if Visual Studio is available #
+    ######################################## #
+    Write-LogMessage "Checking for VS install..."  -Type Highlighted
 
     # Check for VSWhere tool
     if (-not (Test-Path $VSWHERE_FILE_PATH)) {
@@ -340,67 +280,69 @@ General Hints:
 
     Write-LogMessage "Downloaded vswhere successfully" -Type OK
 
-    # Check for VS2017 installer
-    if (-not (Test-Path $VS2017_INSTALLER_PATH)) {
-        Write-LogMessage "Couldn't find VS 2017 installer file in script folder. Trying to grab it from Microsoft..." -Type Warning
-        Invoke-WebRequest -Uri $VS2017_DL_URL -OutFile $VS2017_INSTALLER_PATH
+    # Check for VS installer
+    if (-not (Test-Path $VS_INSTALLER_PATH)) {
+        Write-LogMessage "Couldn't find VS installer file in script folder. Trying to grab it from Microsoft..." -Type Warning
+        Invoke-WebRequest -Uri $VS_DL_URL -OutFile $VS_INSTALLER_PATH
     }
 
     # Check if DL finished
-    if (-not (Test-Path $VS2017_INSTALLER_PATH)) {
-        Write-LogMessage "Download of VS 2017 installer failed. If you got an error message before, share it with the community. Exiting..." -Type Error
+    if (-not (Test-Path $VS_INSTALLER_PATH)) {
+        Write-LogMessage "Download of VS installer failed. If you got an error message before, share it with the community. Exiting..." -Type Error
         return
     }
 
-    Write-LogMessage "Downloaded VS 2017 installer successfully" -Type OK
+    Write-LogMessage "Downloaded VS installer successfully" -Type OK
     # Execute VSWhere
     $Output = & $VSWHERE_FILE_PATH | Out-String
-
-    if ($Output -notmatch "VisualStudio/15.9") {
-        Write-LogMessage "Couldn't find Visual Studio 2017 v15.9 installation." -Type Info
-        $Answer = Read-Host -Prompt "Start VS2017 installation now? (Y/N)"
+    $VSCheck = "installationName: VisualStudio/15"
+    
+    if ($Output -notmatch $VSCheck) {
+        Write-LogMessage "Couldn't find matching Visual Studio installation." -Type Info
+        Write-LogMessage "Checked for: $VSCheck" -Type Info
+        $Answer = Read-Host -Prompt "Start VS installation now? (Y/N)"
         if ($Answer.ToLower() -eq "y") {
-            Write-LogMessage "Starting VS 2017 installation. Please wait for it to complete..." -Type Info
-            # https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2017/install/use-command-line-parameters-to-install-visual-studio?view=vs-2017
-            # https://learn.microsoft.com/de-de/previous-versions/visualstudio/visual-studio-2017/install/workload-component-id-vs-community?view=vs-2017#game-development-with-c
-            Start-Process $VS2017_INSTALLER_PATH -ArgumentList "--add ""Microsoft.VisualStudio.Workload.NativeGame;includeRecommended"" --add Component.Unreal --Passive" -Wait
+            Write-LogMessage "Starting VS installation. Please wait for it to complete..." -Type Info
+            # https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2022/install/use-command-line-parameters-to-install-visual-studio?view=vs-2022
+            # https://learn.microsoft.com/de-de/previous-versions/visualstudio/visual-studio-2022/install/workload-component-id-vs-community?view=vs-2022#game-development-with-c
+            Start-Process $VS_INSTALLER_PATH -ArgumentList "--add ""Microsoft.VisualStudio.Workload.NativeGame;includeRecommended"" --add Component.Unreal --Passive" -Wait
             # Execute VSWhere again for verification
             $Output = & $VSWHERE_FILE_PATH | Out-String
-            if ($Output -notmatch "VisualStudio/15.9") {
+            if ($Output -notmatch $VSCheck) {
                 # Still not installed
-                Write-LogMessage "Failed to install VS 2017. Please try again. Exiting..." -Type Error
+                Write-LogMessage "Failed to install VS. Please try again. Exiting..." -Type Error
                 return
             }
         }
         else {
-            Write-LogMessage "Cannot complete without Visual Studio 2017. Please install it and restart. Exiting..." -Type Error
+            Write-LogMessage "Cannot complete without Visual Studio. Please install it and restart. Exiting..." -Type Error
             return
         }
     }
     else {
         # Check if components are installed
-        Write-LogMessage "Found VS 2017 install. Checking components..." -Type OK
-        # https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2017/install/command-line-parameter-examples?view=vs-2017#using-export
+        Write-LogMessage "Found VS install. Checking components..." -Type OK
+        # https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2022/install/command-line-parameter-examples?view=vs-2022#using-export
         $VSCONFIG_FILE_PATH = "$DATA_FOLDER_PATH\temp.vsconfig"
-        Remove-Item $VSCONFIG_FILE_PATH -Force -ErrorAction SilentlyContinue | Out-Null
-        $VSWhereRun = Start-Process $VS2017_INSTALLER_PATH -ArgumentList "export --config $VSCONFIG_FILE_PATH --quiet" -Wait -PassThru
+        Remove-Item -LiteralPath "$VSCONFIG_FILE_PATH" -Force -ErrorAction SilentlyContinue | Out-Null
+        $VSWhereRun = Start-Process $VS_INSTALLER_PATH -ArgumentList "export --config ""$VSCONFIG_FILE_PATH"" --quiet" -Wait -PassThru
         if ($VSWhereRun.ExitCode -ne 0) {
             Write-LogMessage "Failed to check components. Did you deny the User Account Control? Exiting..." -Type Error
             return
         }
-        $VSConfig = Get-Content $VSCONFIG_FILE_PATH -ErrorAction Stop | ConvertFrom-Json
+        $VSConfig = Get-Content -LiteralPath "$VSCONFIG_FILE_PATH" -ErrorAction Stop | ConvertFrom-Json
         
         # Check workload and components individually first
-        # https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/Tutorials/uProject%20and%20Engine%20Installation.md#install-visual-studio-2017
+        # https://github.com/KH3-Modding-Org/OpenKH3Modding/blob/main/Tutorials/uProject%20and%20Engine%20Installation.md#install-visual-studio-2022
         $IncludesCPPGameDev = $VSConfig.Components -Contains "Microsoft.VisualStudio.Workload.NativeGame" # Game development with C++
         $IncludesCPPProfiling = $VSConfig.Components -Contains "Microsoft.VisualStudio.Component.VC.DiagnosticTools" # C++ profiling tools
         $IncludesUnreal = $VSConfig.Components -Contains "Component.Unreal" # Unreal Engine Installer
-        $Win10SDKMatch = $VSConfig.Components -Match "Microsoft.VisualStudio.Component.Windows10SDK.\d*"
+        $Win10SDKMatch = $VSConfig.Components -Match "Microsoft.VisualStudio.Component.Windows\d\dSDK.\d*"
         $IncludesWin10SDK = $Win10SDKMatch -and ($Matches[0].Split(".")[-1] -ge $WIN10_SDK_MIN_BUILD_VER)
         
         if (-not ($IncludesCPPGameDev -and $IncludesCPPProfiling -and $IncludesUnreal -and $IncludesWin10SDK)) {
             Write-LogMessage -Type Error -Message @"
-VS 2017 is installed, but components are incomplete. Make sure you have the following installed:
+VS is installed, but components are incomplete. Make sure you have the following installed:
 Microsoft.VisualStudio.Workload.NativeGame (Game development with C++)
 Microsoft.VisualStudio.Component.VC.DiagnosticTools (C++ profiling tools)
 Component.Unreal (Unreal Engine Installer)
@@ -412,7 +354,7 @@ Exiting...
         }
     }
 
-    Write-LogMessage "VS 2017 is installed with required components." -Type OK
+    Write-LogMessage "VS is installed with required components." -Type OK
     Write-Host ""
 
     ###################################################################################
@@ -459,6 +401,12 @@ Exiting...
     ###############################################################################################
     # 4. Take path and use it to do the git clone command for the engine branch in a new console. # 
     ###############################################################################################
+
+    # Extracting data from Git URL
+    $EngineRepoData = Get-GitDataFromRepoURL -URL $KHENGINE_REPO_URL
+    $KHENGINE_GITFILE_URL = $EngineRepoData.GitFileURL
+    $KHENGINE_REPO_NAME = $EngineRepoData.RepoName
+    $KHENGINE_BRANCH_NAME = $EngineRepoData.BranchName
 
     Write-LogMessage "Trying to git clone the engine repository..." -Type Highlighted
     Write-LogMessage "You might be asked to authenticate with your GitHub account." -Type Info
@@ -558,9 +506,15 @@ Exiting...
     Write-LogMessage "Project path selection done." -Type OK
     Write-Host ""
 
-    #########################################
+    ############################################
     # 6. Run git clone for that in new console # 
-    #########################################
+    ############################################
+
+    # Extracting data from Git URL
+    $ProjectRepoData = Get-GitDataFromRepoURL -URL $KHPROJECT_REPO_URL
+    $KHPROJECT_GITFILE_URL = $ProjectRepoData.GitFileURL
+    $KHPROJECT_REPO_NAME = $ProjectRepoData.RepoName
+    $KHPROJECT_BRANCH_NAME = $ProjectRepoData.BranchName
 
     Write-LogMessage "Trying to git clone the project repository..."
     Write-LogMessage "You might be asked to authenticate with your GitHub account." -Type Info
@@ -611,7 +565,7 @@ Exiting...
     Write-LogMessage "Press Enter to start."
     Read-Host
 
-    & $EnginePath\$KHENGINE_REPO_NAME\setup.bat *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
+    & "$EnginePath\$KHENGINE_REPO_NAME\setup.bat" *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
     Write-Host ""
 
     ##########################################################
@@ -619,7 +573,7 @@ Exiting...
     ##########################################################
 
     Write-LogMessage "Generating project files via generateprojectfiles.bat... (duh)"
-    & $EnginePath\$KHENGINE_REPO_NAME\GenerateProjectFiles.bat *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
+    & "$EnginePath\$KHENGINE_REPO_NAME\GenerateProjectFiles.bat" *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
     Write-Host ""
 
     #################################################################
@@ -627,7 +581,7 @@ Exiting...
     #################################################################
 
     Write-LogMessage "Registering KHEngine build via UnrealVersionSelector-Win64-Shipping.exe..."
-    & $EnginePath\$KHENGINE_REPO_NAME\Engine\Binaries\Win64\UnrealVersionSelector-Win64-Shipping.exe /register *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
+    & "$EnginePath\$KHENGINE_REPO_NAME\Engine\Binaries\Win64\UnrealVersionSelector-Win64-Shipping.exe" /register *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
     Write-Host ""
 
     ########################################
@@ -644,7 +598,7 @@ Exiting...
         Write-LogMessage "Found UE Version Selector at:" -Type Info
         Write-LogMessage $PathToUESwitcher
         Write-LogMessage "Calling..."
-        & $PathToUESwitcher /switchversionsilent "$ProjectPath\$KHPROJECT_REPO_NAME\$KHPROJECT_REPO_NAME.uproject" "$EnginePath\$KHENGINE_REPO_NAME" *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
+        & "$PathToUESwitcher" /switchversionsilent "$ProjectPath\$KHPROJECT_REPO_NAME\$KHPROJECT_REPO_NAME.uproject" "$EnginePath\$KHENGINE_REPO_NAME" *>&1 | ForEach-Object { "$_" } | Tee-Object -Variable CloneOutput
     }
     else {
         Write-LogMessage "Couldn't find UnrealVersionSelector. Right-click in $ProjectPath\$KHPROJECT_REPO_NAME\$KHPROJECT_REPO_NAME.uproject in Explorer and select ""Switch Unreal Engine Version..."". Select your KHEngine there." -Type Warning
@@ -694,15 +648,15 @@ Exiting...
 # ######### #
 # Execution #
 # ######### #
-Remove-Item $PSScriptRoot\tmp.log -ErrorAction SilentlyContinue | Out-Null
+Remove-Item -LiteralPath "$PSScriptRoot\tmp.log" -ErrorAction SilentlyContinue | Out-Null
 $LogFilePath = "$PSScriptRoot\KHEngineInstall-$(Get-Date -Format "yyyyMMddHHmm").log"
-Start-Transcript "$PSScriptRoot\tmp.log" | Out-Null
+Start-Transcript -LiteralPath "$PSScriptRoot\tmp.log" | Out-Null
 Start-Setup
 Stop-Transcript | Out-Null
 
 Write-Host ""
 # Workaround to remove personal data from log file
-Get-Content "$PSScriptRoot\tmp.log" | Select-Object -Skip 18 | Set-Content $LogFilePath
+Get-Content -LiteralPath "$PSScriptRoot\tmp.log" | Select-Object -Skip 18 | Set-Content $LogFilePath
 Write-Host "Log file created at $LogFilePath"
 Remove-Item $PSScriptRoot\tmp.log -ErrorAction SilentlyContinue | Out-Null
 Write-Host "Done. You may close this window."
